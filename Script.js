@@ -19,47 +19,48 @@ searchIcon.addEventListener("click", () => {
 });
 const container = document.querySelector(".container");
 async function load_news(searchValue) {
-  const response = await fetch(
-    `https://newsapi.org/v2/everything?q=${searchValue}&apiKey=7d636327d2274c83a60cb487a941863d`
-  );
-  const data = await response.json();
-  const news = data.articles;
+  try {
+    const response = await fetch(
+      `https://newsapi.org/v2/everything?q=${searchValue}&apiKey=7d636327d2274c83a60cb487a941863d`
+    );
+    const data = await response.json();
+    const news = data.articles;
 
-  console.log(news);
-  container.innerHTML = `${news
-    .map((singleNews) => {
-      const { url, title, author, content, urlToImage, publishedAt, source } =
-        singleNews;
+    container.innerHTML = `${news
+      .map((singleNews) => {
+        const { url, title, author, content, urlToImage, publishedAt, source } =
+          singleNews;
 
-      const date = publishedAt.split("T");
-      date[1].slice(0, -1);
-      console.log(date[1]);
+        const date = publishedAt.split("T");
 
-      if (author) {
-        return `  <a
-            href=${url}
-            class=" flex flex-col gap-1 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-          >
-            <img
-              class="rounded-t-lg"
-              src=${urlToImage}
-              alt=""
-            />
-            <div class="flex flex-col gap-2 p-4">
-              <h5
-                class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-              >
-                ${title}
-              </h5>
-              <p class="mr-3 text-lg">${source.name}<span class="p-5">${date[0]} ${date[1]}</span></p>
-              <p class="font-normal text-gray-700 dark:text-gray-400">
-               ${content}
-              </p>
-            </div>
-          </a>`;
-      }
-    })
-    .join("")}`;
+        if (author) {
+          return `  <a
+              href=${url}
+              class=" flex flex-col gap-1 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              <img
+                class="rounded-t-lg"
+                src=${urlToImage}
+                alt=""
+              />
+              <div class="flex flex-col gap-2 p-4">
+                <h5
+                  class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                >
+                  ${title}
+                </h5>
+                <p class="mr-3 text-lg">${source.name}<span class="p-5">${date[0]} ${date[1]}</span></p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">
+                 ${content}
+                </p>
+              </div>
+            </a>`;
+        }
+      })
+      .join("")}`;
+  } catch (error) {
+    container.innerHTML = error.msg;
+  }
 }
 load_news("Bangladesh");
 
