@@ -1,0 +1,17 @@
+{
+  "name": "news_website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "postcss.config.js",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "build": "^0.1.4",
+    "vite": "^5.0.12"
+  }
+}

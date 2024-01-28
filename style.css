@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  color: white;
+}
+.search_bar {
+  position: relative;
+}
+.search_bar::after {
+  content: "";
+}
+body {
+  font-family: "Poppins", sans-serif;
+}
+.large_screen_search {
+  opacity: 0;
+  transform: translateY(100%); /* Start hidden below the screen */
+  transition: opacity 0.15s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.large_screen_search.active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 0.3s ease-in-out;
+}
